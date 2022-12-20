@@ -20,6 +20,10 @@ export class ActivityRepository implements IActivityRepository {
         })
     }
 
+    async delete({ _id }: IUpdateActivityRequestDTO): Promise<void> {
+        await Activity.deleteOne( { "_id": _id })
+    }
+
     async validateIfActivityExists(_id: string): Promise<boolean> {
         const activity = ActivityFactory.create()
         return await activity.validateIfObjectIdIsValid(_id)
