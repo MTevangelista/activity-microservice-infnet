@@ -1,6 +1,7 @@
 import { ICreateActivityRequestDTO } from '../useCases/createActivity/ICreateActivityRequestDTO'
 import { Document } from "mongoose"
 import { IUpdateActivityRequestDTO } from '../useCases/updateActivity/IUpdateActivityRequestDTO'
+import { IDeleteActivityRequestDTO } from '../useCases/DeleteActivity /IDeleteActivityRequestDTO'
 
 export interface IActivityRepository {
     save(data: ICreateActivityRequestDTO): Promise<ICreateActivityRequestDTO>
