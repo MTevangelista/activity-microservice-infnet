@@ -6,6 +6,8 @@ interface IActivity extends Document {
     subject: string
     grade: Number
     status: ActivityStatus
+
+    validateIfObjectIdIsValid(id: string): Promise<boolean>
 }
 
 const schema = new Schema<IActivity>({
@@ -29,6 +31,10 @@ const schema = new Schema<IActivity>({
         require: true
     }
 })
+
+schema.methods.validateIfObjectIdIsValid = async function(id: string): Promise<boolean> {
+    return mongoose.Types.ObjectId.isValid(id)
+}
 
 const Activity = mongoose.model("Activity", schema)
 

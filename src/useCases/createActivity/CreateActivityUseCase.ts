@@ -1,7 +1,7 @@
 import { ActivityFactory } from "../../domain/entities/ActivityFactory"
 import { InvalidNameError } from "../../domain/entities/errors/InvalidName"
 import { Name } from "../../domain/entities/valueObject/Name"
-import { ActivityStatus } from "../../domain/enum/ActivityStatus"
+import handleStatus, { ActivityStatus } from "../../domain/enum/ActivityStatus"
 import { IActivityRepository } from "../../repository/IActivityRepository"
 import { Either, left, right } from "../../shared/either/Either"
 import { AppError } from "../../shared/error/AppError"
@@ -23,7 +23,7 @@ export class CreateActivityUseCase {
         }
 
         data.student = nameOrError.value.getName()
-        data.status = this.handleStatus(data.grade)
+        data.status = handleStatus(data.grade)
  
         try {
             const user = ActivityFactory.createWith(data)
@@ -32,16 +32,5 @@ export class CreateActivityUseCase {
         } catch (err) {
             throw new AppError(400, "An unexpected error occurred")
         }
-    }
-
-    private handleStatus(grade: Number): ActivityStatus {
-        if (grade == undefined) {
-            return ActivityStatus.WaitCorrection
-        }
-
-        if (grade <= 6) {
-            return ActivityStatus.Disapproved
-        }
-        return ActivityStatus.Approved
     }
 }
