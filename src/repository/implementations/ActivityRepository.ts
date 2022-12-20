@@ -6,13 +6,9 @@ import { IUpdateActivityRequestDTO } from "../../useCases/updateActivity/IUpdate
 import { IActivityRepository } from "../IActivityRepository"
 
 export class ActivityRepository implements IActivityRepository {
+
     async save(user: ICreateActivityRequestDTO): Promise<ICreateActivityRequestDTO> {
         const response = await Activity.create(user)
-        return response
-    }
-
-    async fetchUserByUID(cpf: string): Promise<Document> {
-        const response = await Activity.findOne({ cpf })
         return response
     }
 
@@ -24,8 +20,13 @@ export class ActivityRepository implements IActivityRepository {
         })
     }
 
-    async validateIfUserAlreadyExists(_id: string): Promise<boolean> {
+    async validateIfActivityExists(_id: string): Promise<boolean> {
         const activity = ActivityFactory.create()
         return await activity.validateIfObjectIdIsValid(_id)
+    }
+
+    async fetchActivities(): Promise<Document[]> {
+        const response = await Activity.find()
+        return response
     }
 }

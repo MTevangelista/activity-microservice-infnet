@@ -10,9 +10,9 @@ export class UpdateActivityUseCase {
 
     async execute(data: IUpdateActivityRequestDTO) {
         let { _id, grade } = data
-        const userAlreadyExists = await this.repository.validateIfUserAlreadyExists(data._id)
+        const activityAlreadyExists = await this.repository.validateIfActivityExists(data._id)
 
-        if (!userAlreadyExists) {
+        if (!activityAlreadyExists) {
             throw new AppError(404, "User not found")
         }
 

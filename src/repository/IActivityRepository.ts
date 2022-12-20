@@ -5,5 +5,6 @@ import { IUpdateActivityRequestDTO } from '../useCases/updateActivity/IUpdateAct
 export interface IActivityRepository {
     save(data: ICreateActivityRequestDTO): Promise<ICreateActivityRequestDTO>
     update(data: IUpdateActivityRequestDTO): Promise<void>
-    validateIfUserAlreadyExists(_id: string): Promise<boolean>
+    validateIfActivityExists(_id: string): Promise<boolean>
+    fetchActivities(): Promise<Document[]>
 }

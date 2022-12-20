@@ -17,7 +17,6 @@ const schema = new Schema<IActivity>({
         trim: true
     },
     subject: {
-        unique: true,
         type: String,
         require: true,
     },
