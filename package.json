@@ -1,5 +1,5 @@
 {
-  "name": "user-microservice",
+  "name": "activity-microservice",
   "version": "1.0.0",
   "main": "server.ts",
   "repository": "https://github.com/MTevangelista/activity-microservice-infnet",
