@@ -6,7 +6,7 @@ import { updateActivityController } from "../../useCases/updateActivity"
 
 const routes = Router()
 
-routes.post("/activities", (request, response) => {
+routes.post("/register/activities", (request, response) => {
     return createActivityController.handle(request, response)
 })
 
@@ -14,11 +14,11 @@ routes.get("/activities", (request, response) => {
     return fetchActivitiesController.handle(request, response)
 })
 
-routes.put("/activities/:_id", (request, response) => {
+routes.put("/update/activities/:_id", (request, response) => {
     return updateActivityController.handle(request, response)
 })
 
-routes.delete("/activities/:_id", (request, response) => {
+routes.delete("/delete/activities/:_id", (request, response) => {
     return deleteActivityController.handle(request, response)
 })
 

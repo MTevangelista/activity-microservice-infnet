@@ -1,0 +1,119 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Activity Microservice",
+        "description": "Assessment de Desenvolvimento de Software Ágil e Escalável com Microsserviços",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/register/activities": {
+            "post": {
+                "summary": "Cadastro de atividade",
+                "description": "Essa rota será responsável por cadastrar uma nova atividade",
+                "tags": ["Activities"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/Activity" },
+                            "examples": {
+                                "activity": {
+                                    "value": {
+                                        "student": "Fulano",
+                                        "subject": "Inglês"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Activity"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/activities": {
+            "get": {
+                "summary": "Buscar atividade",
+                "description": "Essa rota será responsável por buscar as atividades",
+                "tags": ["Activities"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "_id": { "type": "string" },
+                                        "grade": { "type": "number" },
+                                        "student": { "type": "string" },
+                                        "subject": { "type":"string" },
+                                        "status": { "type": "string" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },   
+        "/update/activities/{_id}": {
+            "put": {
+                "summary": "Editar atividade pelo ID",
+                "description": "Essa rota será responsável editar a nota pelo ID",
+                "tags": ["Activities"],
+                "parameters": [{
+                    "name": "_id",
+                    "in": "path",
+                    "description": "Id da atividade para atualizar a nota"
+                }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/Activity" },
+                            "examples": {
+                                "activity": {
+                                    "value": {
+                                        "grade": 10
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/delete/activities/{_id}": {
+            "delete": {
+                "summary": "Remover atividade pelo ID",
+                "description": "Essa rota será responsável por remover uma atividade pelo ID",
+                "tags": ["Activities"],
+                "parameters": [{
+                    "name": "_id",
+                    "in": "path",
+                    "description": "Id da atividade para atualizar a nota"
+                }]
+            }
+        }              
+    },
+    "components": {
+        "schemas": {
+            "Activity": {
+                "type": "object",
+                "properties": {
+                    "student": { "type": "string" },
+                    "subject": { "type": "string" }
+                }
+            }            
+        }
+    }
+}
